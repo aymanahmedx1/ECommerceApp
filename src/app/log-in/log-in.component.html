@@ -1,1 +1,37 @@
-<p>log-in works!</p>
+<div class="container">
+    <div class="register-form mx-auto pt-5">
+        <div>
+            <p *ngIf="errorMessage!='' "  class="alert alert-danger">{{errorMessage}}</p>
+        </div>
+        <h3>Login Now </h3>
+        <form [formGroup]="loginForm" (ngSubmit)="register(loginForm)">
+            <div class="py-1">
+                <label for="email">Email :</label>
+                <input type="email" class="form-control " id="email" formControlName="email">
+                <div class="my-1" *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+                    <p class="alert alert-danger" *ngIf="loginForm.get('email')?.errors!['required']"> Email is
+                        required !</p>
+                    <p class="alert alert-danger" *ngIf="loginForm.get('email')?.errors!['email']"> enter Valid Email
+                        like abc@example.com !</p>
+                </div>
+            </div>
+            <div class="py-1">
+                <label for="password">Password :</label>
+                <input type="password" class="form-control " id="password" formControlName="password">
+                <div class="my-1" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+                    <p class="alert alert-danger" *ngIf="loginForm.get('password')?.errors!['required']"> Password is
+                        required !</p>
+                    <p class="alert alert-danger" *ngIf="loginForm.get('password')?.errors!['pattern']"> enter Valid
+                        Password start with capital letter between 6 and 15 char!</p>
+                </div>
+            </div>
+            <button *ngIf="!isLoading else loading" [disabled]="loginForm.invalid"
+                class="btn btn-outline-success ms-auto d-block mt-3">Login Now</button>
+            <ng-template #loading>
+                <button class="ms-auto d-block mt-3 btn btn-success"><i
+                        class="fa-solid fa-spinner fa-spin fa-1x"></i></button>
+            </ng-template>
+        </form>
+
+    </div>
+</div>

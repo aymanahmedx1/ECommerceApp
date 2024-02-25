@@ -9,15 +9,16 @@ import { WishListComponent } from './wish-list/wish-list.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { BrandsComponent } from './brands/brands.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path:"" ,redirectTo:"home",pathMatch:"full"},
-  {path:"home",component:HomeComponent , title:"Home"},
-  {path:"brands",component:BrandsComponent , title:"Brands"},
-  {path:"cart",component:CartComponent , title:"Cart"},
-  {path:"wishList",component:WishListComponent , title:"WishList"},
-  {path:"categories",component:CategoriesComponent , title:"Categories"},
-  {path:"products",component:ProductsComponent , title:"Products"},
+  {path:"home",component:HomeComponent , title:"Home" , canActivate:[authGuard]},
+  {path:"brands",component:BrandsComponent , title:"Brands", canActivate:[authGuard]},
+  {path:"cart",component:CartComponent , title:"Cart", canActivate:[authGuard]},
+  {path:"wishList",component:WishListComponent , title:"WishList", canActivate:[authGuard]},
+  {path:"categories",component:CategoriesComponent , title:"Categories", canActivate:[authGuard]},
+  {path:"products",component:ProductsComponent , title:"Products", canActivate:[authGuard]},
   {path:"logIn",component:LogInComponent , title:"Log In"},
   {path:"signUp",component:SginUpComponent , title:"SignUp"},
   {path:"**",component:NotFoundComponent , title:"404 NotFound"},
