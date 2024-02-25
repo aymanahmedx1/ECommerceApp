@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SignUpData } from '../intrface/sign-up-data';
+import { SignUpData } from '../interface/sign-up-data';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';

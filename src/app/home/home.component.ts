@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductService } from '../service/product.service';
-import { Product } from '../intrface/product';
+import { Category, Product } from '../interface/product';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,43 +11,29 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   allProducts: Product[] = [];
+  allCategories: Category[] = [];
   productSubscription = new Subscription();
+  categoriesSubscription = new Subscription();
   constructor(private _productService: ProductService) { }
 
   ngOnInit(): void {
+    this.categoriesSubscription = this._productService.getAllCategories().subscribe({
+      next: (response) => {
+        this.allCategories = response.data;
+      },
+      error: (error) => { }
+    })
     this.productSubscription = this._productService.getAllProducts().subscribe({
       next: (response) => {
         this.allProducts = response.data;
       },
-      error: (error) => { console.log(error);
+      error: (error) => {
+        console.log(error);
       },
     })
   }
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: true,
-    pullDrag: false,
-    dots: true,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
-  }
   ngOnDestroy(): void {
     this.productSubscription.unsubscribe();
+    this.categoriesSubscription.unsubscribe();
   }
 }

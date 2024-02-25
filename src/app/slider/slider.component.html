@@ -1,0 +1,9 @@
+
+<owl-carousel-o [options]="customOptions" >
+    <ng-template carouselSlide *ngFor="let i of allCategories">
+     <div class=" overflow-hidden text-center">
+      <img [src]="i.image" [alt]="i.name" class="carousel-container" >
+      <p class="fs-5 fw-bolder">{{i.name}}</p>
+     </div>
+    </ng-template>  
+  </owl-carousel-o>

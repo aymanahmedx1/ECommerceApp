@@ -17,7 +17,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import{HttpClientModule} from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SliderComponent } from './slider/slider.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     ProductsComponent,
     CategoriesComponent,
     BrandsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

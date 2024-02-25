@@ -11,4 +11,7 @@ export class ProductService {
   getAllProducts():Observable<any>{
     return this._HttpClint.get("https://ecommerce.routemisr.com/api/v1/products");
   }
+  getAllCategories():Observable<any>{
+    return this._HttpClint.get("https://ecommerce.routemisr.com/api/v1/categories");
+  }
 }

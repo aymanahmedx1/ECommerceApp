@@ -1,0 +1,39 @@
+@import 'src/app/var';
+
+*,
+body {
+    font-family: $font-family;
+}
+
+.product-category {
+    color: $main-color;
+}
+
+.price-span {
+    font-size: 14px;
+}
+
+.rating-start {
+    color: $rating-color;
+
+}
+
+.pruduct {
+    transition: .3s all;
+    &:hover {
+        box-shadow: 2px 2px 20px #4fa74f;
+        .add-btn{
+            transform: translateY(0px);
+        }
+    }
+
+    .add-btn {
+        background-color: $main-color;
+        transition: .5s all;
+        transform: translateY(100px);
+        &:hover {
+            background-color: $hover-color;
+        }
+    }
+
+}
