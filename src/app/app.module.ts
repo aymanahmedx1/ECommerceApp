@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import{HttpClientModule} from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { SliderComponent } from './slider/slider.component'
+import { SliderComponent } from './slider/slider.component';
+import { ProductDetailsComponent } from './product-details/product-details.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { SliderComponent } from './slider/slider.component'
     CategoriesComponent,
     BrandsComponent,
     NotFoundComponent,
-    SliderComponent
+    SliderComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { BrandsComponent } from './brands/brands.component';
 import { authGuard } from './guard/auth.guard';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 const routes: Routes = [
   {path:"" ,redirectTo:"home",pathMatch:"full"},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"wishList",component:WishListComponent , title:"WishList", canActivate:[authGuard]},
   {path:"categories",component:CategoriesComponent , title:"Categories", canActivate:[authGuard]},
   {path:"products",component:ProductsComponent , title:"Products", canActivate:[authGuard]},
+  {path:"productDetails/:id",component:ProductDetailsComponent , title:"Product Details", canActivate:[authGuard]},
   {path:"logIn",component:LogInComponent , title:"Log In"},
   {path:"signUp",component:SginUpComponent , title:"SignUp"},
   {path:"**",component:NotFoundComponent , title:"404 NotFound"},
