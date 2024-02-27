@@ -1,0 +1,8 @@
+@import 'src/app/var';
+.add-btn {
+    background-color: $main-color;
+    transition: .5s all;
+    &:hover {
+        background-color: $hover-color;
+    }
+}

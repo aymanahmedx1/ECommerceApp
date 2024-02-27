@@ -14,7 +14,7 @@ export class SginUpComponent {
   constructor(private _AuthService: AuthService, private _Router: Router) { }
   registerForm = new FormGroup(
     {
-      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      details: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z]{1}[a-zA-z0-9]{6,15}$/)]),
       rePassword: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z]{1}[a-zA-z0-9]{6,15}$/)]),

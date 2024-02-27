@@ -63,4 +63,15 @@ export interface ProductDetails {
 }
 
 
+export interface Cart {
+    count:   number;
+    _id:     string;
+    product: Product;
+    price:   number;
+}
+
+
+
+
+
 

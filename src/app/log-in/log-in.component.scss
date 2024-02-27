@@ -8,6 +8,9 @@ label{
 .form-control{
     --bs-border-width :2px ; 
 }
+.register-form{
+    max-width: 50%;
+}
 @media screen and (max-width:992px) {
     .register-form{
         max-width: 100%;

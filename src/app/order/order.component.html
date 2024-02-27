@@ -1,0 +1,40 @@
+<div class="container py-5 max-width">
+    <form [formGroup]="addressForm" (ngSubmit)="payNow(addressForm)">
+        <div class="py-1">
+            <label for="details">details :</label>
+            <input type="details" class="form-control " id="details" formControlName="details">
+            <div class="my-1" *ngIf="addressForm.get('details')?.errors && addressForm.get('details')?.touched">
+                <p class="alert alert-danger" *ngIf="addressForm.get('details')?.errors!['required']"> details is
+                    required !</p>
+                <p class="alert alert-danger" *ngIf="addressForm.get('details')?.errors!['pattern']"> enter Valid
+                    address !</p>
+            </div>
+        </div>
+        <div class="py-1">
+            <label for="phone">phone :</label>
+            <input type="tel" class="form-control " id="phone" formControlName="phone">
+            <div class="my-1" *ngIf="addressForm.get('phone')?.errors && addressForm.get('phone')?.touched">
+                <p class="alert alert-danger" *ngIf="addressForm.get('phone')?.errors!['required']"> phone is
+                    required !</p>
+                <p class="alert alert-danger" *ngIf="addressForm.get('phone')?.errors!['pattern']"> enter Valid
+                    EG Phone number</p>
+            </div>
+        </div>
+        <div class="py-1">
+            <label for="city">city :</label>
+            <input type="city" class="form-control " id="city" formControlName="city">
+            <div class="my-1" *ngIf="addressForm.get('city')?.errors && addressForm.get('city')?.touched">
+                <p class="alert alert-danger" *ngIf="addressForm.get('city')?.errors!['required']"> city is
+                    required !</p>
+                <p class="alert alert-danger" *ngIf="addressForm.get('city')?.errors!['pattern']"> enter Valid city Name
+                    !</p>
+            </div>
+        </div>
+        <button *ngIf="!isLoading else loading" [disabled]="addressForm.invalid" 
+            class="btn btn-outline-success ms-auto d-block mt-3">Pay Now</button>
+        <ng-template #loading>
+            <button class="ms-auto d-block mt-3 btn btn-success"><i
+                    class="fa-solid fa-spinner fa-spin fa-1x"></i></button>
+        </ng-template>
+    </form>
+</div>

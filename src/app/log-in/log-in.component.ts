@@ -19,7 +19,6 @@ export class LogInComponent {
     }
   );
   register(form: any) {
-
     if (form.valid) {
       this.isLoading = true;
       this._AuthService.logIn(form.value).subscribe({

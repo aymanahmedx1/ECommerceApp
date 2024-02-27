@@ -15,11 +15,17 @@ import { CategoriesComponent } from './categories/categories.component';
 import { BrandsComponent } from './brands/brands.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import{HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SliderComponent } from './slider/slider.component';
 import { ProductDetailsComponent } from './product-details/product-details.component'
+import { HeaderInterceptor } from './header.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { OrderComponent } from './order/order.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +41,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     BrandsComponent,
     NotFoundComponent,
     SliderComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    OrderComponent,
+    AllOrdersComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +53,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     HttpClientModule,
     BrowserAnimationsModule,
     CarouselModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

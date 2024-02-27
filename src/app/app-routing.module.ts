@@ -11,6 +11,8 @@ import { ProductsComponent } from './products/products.component';
 import { BrandsComponent } from './brands/brands.component';
 import { authGuard } from './guard/auth.guard';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { OrderComponent } from './order/order.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
 
 const routes: Routes = [
   {path:"" ,redirectTo:"home",pathMatch:"full"},
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path:"productDetails/:id",component:ProductDetailsComponent , title:"Product Details", canActivate:[authGuard]},
   {path:"logIn",component:LogInComponent , title:"Log In"},
   {path:"signUp",component:SginUpComponent , title:"SignUp"},
+  {path:"order/:cartID",component:OrderComponent , title:"Check Out"},
+  {path:"allorders",component:AllOrdersComponent , title:"All Orders"},
   {path:"**",component:NotFoundComponent , title:"404 NotFound"},
 ];
 

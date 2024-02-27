@@ -10,7 +10,7 @@ $rating-color: #ffc908;
 
 
 .rating-color {
-    color: var(--rating-color);
+    color: $rating-color;
 }
 
 .cursor-pointer {
@@ -45,13 +45,13 @@ a:hover {
 }
 
 .text-main {
-    color: var(--main-color);
+    color: $main-color;
 }
 
 .bg-main {
-    background-color: var(--main-color) !important;
+    background-color:$main-color !important;
 }
 
 .bg-main-light {
-    background-color: var(--light-color) !important;
+    background-color: $light-color !important;
 }
