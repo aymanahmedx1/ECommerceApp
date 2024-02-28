@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent {
+export class LogInComponent implements OnDestroy {
+  logInSubscription = new Subscription();
   isLoading: boolean = false;
   errorMessage: string = '';
   constructor(private _AuthService: AuthService, private _Router: Router) { }
@@ -21,7 +23,7 @@ export class LogInComponent {
   register(form: any) {
     if (form.valid) {
       this.isLoading = true;
-      this._AuthService.logIn(form.value).subscribe({
+      this.logInSubscription = this._AuthService.logIn(form.value).subscribe({
         next: (response) => {
           if (response.message == 'success') {
             localStorage.setItem('token', response.token);
@@ -40,5 +42,10 @@ export class LogInComponent {
 
     }
 
+  }
+
+
+  ngOnDestroy(): void {
+    this.logInSubscription.unsubscribe();
   }
 }

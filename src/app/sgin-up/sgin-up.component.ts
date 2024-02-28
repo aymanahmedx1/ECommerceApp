@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sgin-up',
   templateUrl: './sgin-up.component.html',
   styleUrls: ['./sgin-up.component.scss']
 })
-export class SginUpComponent {
+export class SginUpComponent implements OnDestroy {
   isLoading: boolean = false;
   errorMessage: string = '';
+  signUpSubscription = new Subscription();
   constructor(private _AuthService: AuthService, private _Router: Router) { }
   registerForm = new FormGroup(
     {
@@ -42,5 +44,8 @@ export class SginUpComponent {
 
     }
 
+  }
+   ngOnDestroy(): void {
+    this.signUpSubscription.unsubscribe();
   }
 }

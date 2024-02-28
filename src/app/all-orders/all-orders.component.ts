@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { CartService } from '../service/cart.service';
 import { Order } from '../interface/order';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDetialsComponent } from '../order-detials/order-detials.component';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-all-orders',
   templateUrl: './all-orders.component.html',
   styleUrls: ['./all-orders.component.scss']
 })
-export class AllOrdersComponent implements OnInit {
+export class AllOrdersComponent implements OnInit, OnDestroy {
   constructor(private _CartService: CartService, private _MatDialog: MatDialog) { }
+  ngOnDestroy(): void {
+    this.allOrderSubscribe.unsubscribe();
+  }
+  allOrderSubscribe = new Subscription();
   allOrders: Order[] = [];
 
   ngOnInit(): void {
     let token = localStorage.getItem("token");
     let decoded = this.decodeToken(token);
-    this._CartService.getAllOrders(decoded.id).subscribe({
+    this.allOrderSubscribe = this._CartService.getAllOrders(decoded.id).subscribe({
       next: (response) => {
         let orders: Order[] = response;
         this.allOrders = orders.sort((n1, n2) => {
@@ -51,9 +56,9 @@ export class AllOrdersComponent implements OnInit {
   }
 
 
-  openDialog(order:Order): void {
+  openDialog(order: Order): void {
     const dialogRef = this._MatDialog.open(OrderDetialsComponent, {
-      data: { selected : order },
+      data: { selected: order },
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

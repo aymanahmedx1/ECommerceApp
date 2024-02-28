@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../service/cart.service';
 import { Subscription } from 'rxjs';
 import { Cart } from '../interface/product';
@@ -9,14 +9,16 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
-  cartSubscription = new Subscription();
+export class CartComponent implements OnInit ,OnDestroy {
+  getUserCartSubscription = new Subscription();
+  changeCartQtySubscription = new Subscription();
+  deleteItemSubscription = new Subscription();
   cartID:string="";
   constructor(private _CartService: CartService , private toastr:ToastrService) { }
   cartItems: Cart[] = []
   totalCartPrice:number=0 ; 
   ngOnInit(): void {
-    this.cartSubscription = this._CartService.getUserCart().subscribe({
+    this.getUserCartSubscription = this._CartService.getUserCart().subscribe({
       next: (response) => {
         this.cartItems = response.data.products;
         this.totalCartPrice= response.data.totalCartPrice ; 
@@ -29,7 +31,7 @@ export class CartComponent implements OnInit {
     })
   }
   changeItemQty(productID:string , updatedQty:number){
-    this._CartService.changCartItemQty(productID,updatedQty).subscribe({
+    this.changeCartQtySubscription =  this._CartService.changCartItemQty(productID,updatedQty).subscribe({
       next:(response)=>{
         this.cartItems = response.data.products;
         this.totalCartPrice= response.data.totalCartPrice ; 
@@ -43,7 +45,7 @@ export class CartComponent implements OnInit {
     })
   }
   deleteCartItem(productID:string){
-    this._CartService.deleteItemFromCart(productID).subscribe({
+    this.deleteItemSubscription =  this._CartService.deleteItemFromCart(productID).subscribe({
       next:(response)=>{
         this.cartItems = response.data.products;
         this.totalCartPrice= response.data.totalCartPrice ; 
@@ -59,5 +61,12 @@ export class CartComponent implements OnInit {
   }
   showDelete() {
     this.toastr.error( 'Product Deleted');
+  }
+
+
+  ngOnDestroy(): void {
+    this.getUserCartSubscription.unsubscribe();
+    this.changeCartQtySubscription.unsubscribe();
+    this.deleteItemSubscription.unsubscribe();
   }
 }

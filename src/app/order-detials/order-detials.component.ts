@@ -9,8 +9,7 @@ import { Order } from '../interface/order';
 })
 export class OrderDetialsComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public selectedOrder: {selected: Order}) {
-    console.log(selectedOrder.selected);
-    
-   }
+
+  }
 
 }

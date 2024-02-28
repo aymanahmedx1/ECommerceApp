@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit ,OnDestroy {
       next:(response)=>{
         if(response.status ==="success"){
           this._CartService.cartProductCount.next(response.numOfCartItems);
-          this.showSuccess();
+          this.showSuccess('Product Add To Cart Success');
         }
       },
       error:(err)=>{},
@@ -54,6 +54,7 @@ export class ProductDetailsComponent implements OnInit ,OnDestroy {
         next: (response) => {
           if (response.status === "success") {
             this.getWighList();
+            this.showSuccess("Add To Wishlist Success")
           }
 
         },
@@ -64,8 +65,8 @@ export class ProductDetailsComponent implements OnInit ,OnDestroy {
       }
     );
   }
-  showSuccess() {
-    this.toastr.success( 'Product Add To Cart Success',"Add To Cart");
+  showSuccess(message:string) {
+    this.toastr.success();
   }
   ngOnInit(): void {
     let productID = this._ActivatedRoute.snapshot.params['id'];

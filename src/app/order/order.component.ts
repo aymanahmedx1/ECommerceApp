@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from '../service/cart.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent {
+export class OrderComponent implements OnDestroy {
   isLoading: boolean = false;
   errorMessage: string = '';
-  constructor(private _CartService:CartService , private _ActivatedRoute:ActivatedRoute) { }
-  
+  createOrderSubscription = new Subscription();
+  constructor(private _CartService: CartService, private _ActivatedRoute: ActivatedRoute) { }
+
   addressForm = new FormGroup(
     {
       details: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]{3,}$/)]),
@@ -22,15 +24,15 @@ export class OrderComponent {
   );
 
 
- 
-  payNow(form: any ) {
+
+  payNow(form: any) {
     if (form.valid) {
-     let cartID =  this._ActivatedRoute.snapshot.params['cartID'];      
+      let cartID = this._ActivatedRoute.snapshot.params['cartID'];
       this.isLoading = true;
-      this._CartService.createOrder(form.value,cartID).subscribe({
+      this._CartService.createOrder(form.value, cartID).subscribe({
         next: (response) => {
           if (response.status == 'success') {
-              location.href = response.session.url ; 
+            location.href = response.session.url;
           }
         },
         error: (err) => {
@@ -41,5 +43,8 @@ export class OrderComponent {
 
     }
 
+  }
+  ngOnDestroy(): void {
+    this.createOrderSubscription.unsubscribe();
   }
 }

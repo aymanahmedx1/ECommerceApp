@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { Subscription } from 'rxjs';
 import { Category, subcategory } from '../interface/product';
@@ -9,7 +9,7 @@ import { ViewportScroller } from '@angular/common';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit ,OnDestroy{
   allCategorySuscribtion = new Subscription();
   allSubCategorySubscription = new Subscription();
   allCategories: Category[] = [];
@@ -17,6 +17,10 @@ export class CategoriesComponent implements OnInit {
   selectedCategory: string = '';
   constructor(private _ProductService: ProductService ,private _ViewportScroller:ViewportScroller) {
 
+  }
+  ngOnDestroy(): void {
+    this.allCategorySuscribtion.unsubscribe();
+    this.allSubCategorySubscription.unsubscribe();
   }
   ngOnInit(): void {
     this.allCategorySuscribtion = this._ProductService.getAllCategories().subscribe({

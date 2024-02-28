@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnDestroy {
   isLoading: boolean = false;
   errorMessage: string = '';
+  changePasswordSubscription = new Subscription();
   constructor(private _AuthService: AuthService, private _Router: Router) { }
+
   dataForm = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -22,7 +25,7 @@ export class ChangePasswordComponent {
   changePassword(form: any) {
     if (form.valid) {
       this.isLoading = true;
-      this._AuthService.changePassword(form.value).subscribe({
+      this.changePasswordSubscription = this._AuthService.changePassword(form.value).subscribe({
         next: (response) => {
           this._Router.navigate(['/logIn']);
           this.isLoading = false;
@@ -40,5 +43,7 @@ export class ChangePasswordComponent {
     const decoded = jwtDecode(token);
     return decoded;
   }
-
+  ngOnDestroy(): void {
+    this.changePasswordSubscription.unsubscribe();
+  }
 }

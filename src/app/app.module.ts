@@ -24,7 +24,6 @@ import { HeaderInterceptor } from './header.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { OrderComponent } from './order/order.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
-import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { OrderDetialsComponent } from './order-detials/order-detials.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -51,7 +50,6 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     ProductDetailsComponent,
     OrderComponent,
     AllOrdersComponent,
-    OrderSummaryComponent,
     OrderDetialsComponent,
     ForgetPasswordComponent,
     ChangePasswordComponent,
