@@ -1,0 +1,20 @@
+@import "src/app/var.scss";
+body , html{
+    scroll-behavior: smooth;
+}
+img{
+    object-position: center;
+    object-fit: cover;
+}
+h2{
+    color:$hover-color;
+    font-size: 30px;
+}
+
+
+.cat{
+    transition: .5s all;
+    &:hover {
+        box-shadow: 2px 2px 20px #4fa74f;
+    }
+}

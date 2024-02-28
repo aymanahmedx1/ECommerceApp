@@ -27,7 +27,6 @@ export class SginUpComponent {
       this.isLoading = true;
       this._AuthService.signUp(form.value).subscribe({
         next: (response) => {
-          console.log(response);
           if (response.message == 'success') {
             this._Router.navigate(['logIn']);
             // localStorage.setItem('token',response.token);

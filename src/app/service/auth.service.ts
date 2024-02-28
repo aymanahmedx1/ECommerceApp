@@ -16,12 +16,9 @@ export class AuthService {
     if (token) {
       this.userLogedIn.next(true) ; 
       let decodedToken = this.decodeToken(token) ; 
-      console.log(decodedToken);
       
       this.userName.next(decodedToken.name) ;
-    }
-    console.log("ffffff");
-    
+    }    
   }
   decodeToken(token:any):any{
     const decoded = jwtDecode(token);

@@ -26,7 +26,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._CartService.getCartProductCount().subscribe({
       next: (response) => {
         this._CartService.cartProductCount.next(response.numOfCartItems);
-      }
+      },
+      error:(error)=>{}
     });
 
     this.logedSubscribe = this._AuthService.userLogedIn.subscribe({
@@ -34,7 +35,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     })
     this.userNameSubscribe = this._AuthService.userName.subscribe({
       next: (value) => {
-        this.userName = value; console.log(this.userName);
+        this.userName = value;
       }
     })
   }

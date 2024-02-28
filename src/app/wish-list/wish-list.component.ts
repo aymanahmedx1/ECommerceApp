@@ -37,9 +37,7 @@ export class WishListComponent implements OnInit {
   }
   removeFromList(productID:string){
     this._WishListService.removeProduct(productID).subscribe({
-      next:(response)=>{
-        console.log(response);
-        
+      next:(response)=>{        
         if(response.status ==="success"){
           this.getWishList();
           this.showDeleted();

@@ -25,13 +25,10 @@ export class OrderComponent {
  
   payNow(form: any ) {
     if (form.valid) {
-     let cartID =  this._ActivatedRoute.snapshot.params['cartID']; 
-     console.log(cartID);
-     
+     let cartID =  this._ActivatedRoute.snapshot.params['cartID'];      
       this.isLoading = true;
       this._CartService.createOrder(form.value,cartID).subscribe({
         next: (response) => {
-          console.log(response);
           if (response.status == 'success') {
               location.href = response.session.url ; 
           }

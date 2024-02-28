@@ -23,7 +23,6 @@ export class LogInComponent {
       this.isLoading = true;
       this._AuthService.logIn(form.value).subscribe({
         next: (response) => {
-          console.log(response);
           if (response.message == 'success') {
             localStorage.setItem('token', response.token);
             localStorage.setItem('userName', response.user.name);

@@ -13,7 +13,7 @@ export interface Product {
     price:               number;
     imageCover:          string;
     category:            Category;
-    brand:               Category;
+    brand:               Brand;
     ratingsAverage:      number;
     createdAt:           Date;
     updatedAt:           Date;
@@ -29,7 +29,22 @@ export interface Category {
     image?:    string;
     category?: Category;
 }
-
+export interface Brand {
+    _id:       string;
+    name:      string;
+    slug:      string;
+    image:     string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+export interface subcategory {
+    _id:       string;
+    name:      string;
+    slug:      string;
+    category:  string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
 
 export interface Metadata {

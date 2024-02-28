@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductDetails } from '../interface/product';
+import { Product, ProductDetails } from '../interface/product';
 import { ProductService } from '../service/product.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CartService } from '../service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { WishListService } from '../service/wish-list.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit ,OnDestroy {
   productSubscribtion = new Subscription();
+  wishListSubscription = new Subscription();
   product: any =null;
-  constructor(private toastr: ToastrService,private _ActivatedRoute: ActivatedRoute, private _ProductService: ProductService ,  private _CartService:CartService) {
+  productInWhishList:boolean=false;  
+  constructor( private _WishListService:WishListService, private toastr: ToastrService,private _ActivatedRoute: ActivatedRoute, private _ProductService: ProductService ,  private _CartService:CartService) {
 
   }
+ 
 
   addToCart(productID:string){
     this._CartService.addToCart(productID).subscribe({
@@ -30,7 +34,36 @@ export class ProductDetailsComponent implements OnInit {
       error:(err)=>{},
     });
   }
-  
+  getWighList() {
+    this.wishListSubscription =  this._WishListService.getWishList().subscribe({
+      next: (response) => {
+        let wishList: Product[] = response.data;
+        for (const p of wishList) {      
+          if(p._id === this.product._id){
+            this.productInWhishList = true ;             
+          }
+        }
+      },
+      error: (error) => { console.log(error);
+      }
+    })
+  }
+  addToWishList(productID: string) {
+    this._WishListService.addToWishList(productID).subscribe(
+      {
+        next: (response) => {
+          if (response.status === "success") {
+            this.getWighList();
+          }
+
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      }
+    );
+  }
   showSuccess() {
     this.toastr.success( 'Product Add To Cart Success',"Add To Cart");
   }
@@ -44,6 +77,8 @@ export class ProductDetailsComponent implements OnInit {
         error: (error) => { },
       }
     )
+    ;
+    this.getWighList();
 
   }
 
@@ -72,5 +107,8 @@ export class ProductDetailsComponent implements OnInit {
     },
     nav: true
   }
-
+  ngOnDestroy(): void {
+    this.productSubscribtion.unsubscribe();
+    this.wishListSubscription.unsubscribe();
+  }
 }

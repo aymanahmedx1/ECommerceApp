@@ -1,0 +1,50 @@
+@import 'src/app/var';
+
+.product-category {
+    color: $main-color;
+}
+
+.price-span {
+    font-size: 14px;
+}
+
+
+.pruduct {
+    transition: .3s all;
+
+    &:hover {
+        box-shadow: 2px 2px 20px #4fa74f;
+
+        .add-btn {
+            transform: translateY(0px);
+        }
+
+        .love-heart {
+            // transform: translateY(0);
+        }
+    }
+    .love-heart-main{
+        color: $main-color;
+    }
+    .love-heart-wish{
+        color: tomato;
+    }
+    .love-heart {
+        // transform: translateY(-100px);
+        right: 2%;
+        top: 2%;
+        color: inherit;
+        // transition: .5s all;
+    }
+
+    .add-btn {
+        background-color: $main-color;
+        transition: .5s all;
+        transform: translateY(100px);
+
+        &:hover {
+            background-color: $hover-color;
+        }
+    }
+
+}

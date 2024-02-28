@@ -1,1 +1,24 @@
-<p>categories works!</p>
+<div class="container py-5">
+    <div class="row gy-4">
+        <div class="col-md-4" *ngFor="let cat of allCategories">
+            <div class="cat py-2 px-3 rounded-2 overflow-hidden position-relative cursor-pointer h-100">
+                <div class="card" (click)="selectCategory(cat)">
+                    <div class="bg-danger" style="height: 300px;">
+                        <img [src]="cat.image" alt="" class="w-100 h-100">
+                    </div>
+                    <h2 class="py-2 text-center">{{cat.name}}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="selectedCategory!==''" id="subCategoryArea" class="mx-auto d-flex justify-content-center align-items-center flex-column p-5">
+        <h2><span>{{selectedCategory}} </span>Subcategory</h2>
+            <div class="row gy-4 w-100">
+                <div class="col-md-4" *ngFor="let item of allSunCategories">
+                   <div class="card cat text-center py-3 cursor-pointer ">
+                    <span class="fw-bold fs-4">{{item.name}}</span>
+                   </div>
+                </div>
+            </div>
+    </div>
+</div>

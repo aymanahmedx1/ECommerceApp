@@ -25,6 +25,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { OrderComponent } from './order/order.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { LoadingInterceptor } from './loading.interceptor';
+import { OrderDetialsComponent } from './order-detials/order-detials.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     ProductDetailsComponent,
     OrderComponent,
     AllOrdersComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    OrderDetialsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,11 +58,17 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     BrowserAnimationsModule,
     CarouselModule,
     ToastrModule.forRoot(),
+    MatDialogModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true
     }],
   bootstrap: [AppComponent]

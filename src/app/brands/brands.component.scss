@@ -1,0 +1,15 @@
+@import 'src/app/var.scss' ;
+
+.brand{
+    transition: .5s all;
+    &:hover {
+        box-shadow: 2px 2px 20px #4fa74f;
+    }
+
+}
+
+.brand-title{
+    color: $main-color;
+    font-size: 30px;
+    font-weight: bold;
+}

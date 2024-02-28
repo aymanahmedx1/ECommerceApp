@@ -19,9 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   categoriesSubscription = new Subscription();
   constructor(private _WishListService: WishListService, private _productService: ProductService, private toastr: ToastrService, private _CartService: CartService) { }
   check(id: string): boolean {
-    console.log(id);
     return this.wishList.includes(id);
-
   }
   ngOnInit(): void {
     this.getWighList();

@@ -14,8 +14,13 @@ export class ProductService {
   getAllCategories():Observable<any>{
     return this._HttpClint.get("https://ecommerce.routemisr.com/api/v1/categories");
   }
+  getCategoySubCategories(categoryID:string):Observable<any>{
+    return this._HttpClint.get(`https://ecommerce.routemisr.com/api/v1/categories/${categoryID}/subcategories`);
+  }
   getProductDetails(id:string):Observable<any>{
     return this._HttpClint.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
-
+  }
+  getAllBrands():Observable<any>{
+    return this._HttpClint.get(`https://ecommerce.routemisr.com/api/v1/brands`);
   }
 }

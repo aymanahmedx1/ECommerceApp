@@ -1,0 +1,44 @@
+<div class="container wrapper">
+    <table class="w-100 table table-hover ">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of selectedOrder.selected.cartItems">
+                <!-- Title -->
+                <td> 
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div class="img-product">
+                            <img [src]="item.product.imageCover" alt="{{item.product.description}}" class="modal-img">
+                        </div>
+                        <div class="name-product">
+                          {{item.product.title}}
+                        </div>
+                    </div>
+                </td>
+                <!-- Price -->
+                <td class="">
+                    <div class="text-muted pt-5">
+                        {{item.price}} EGP
+                    </div>
+                </td>
+                <td>
+                   <div class="pt-5 text-center">
+                    <p>{{item.count}}</p>
+                   </div>
+                </td>
+                <!-- Total -->
+                <td>
+                    <div class="total pt-5">
+                       {{item.price * item.count | currency:'EGP'}}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

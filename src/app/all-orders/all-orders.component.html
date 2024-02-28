@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="pb-3">All Orders</h2>
-    <div class="row">
+    <div class="row" *ngIf="allOrders.length >0 ">
         <div class="col-12">
             <table class="table table-hover text-center">
                 <thead>
@@ -20,7 +20,7 @@
                         <td>{{item.cartItems.length}}</td>
                         <td>{{item.totalOrderPrice}}</td>
                         <td>{{item.paymentMethodType}}</td>
-                        <td> <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-info" (click)="selectOrder(selectOrder)">Order Detail</a> </td>
+                        <td> <a  class="btn btn-outline-info" (click)="openDialog(item)">Order Detail</a> </td>
                     </tr>
                 </tbody>
             </table>
@@ -28,59 +28,3 @@
     </div>
 </div>
   
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"><span class="pe-2">shippingAddress</span> {{selectedOrder.shippingAddress.details}}</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-5">
-            <table class="w-100 table table-hover">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th class="text-center">Price</th>
-                        <th class="text-center">Quantity</th>
-                        <th class="text-center">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of selectedOrder.cartItems">
-                        <!-- Title -->
-                        <td> 
-                            <div class="d-flex justify-content-start align-items-center">
-                                <div class="img-product">
-                                    <img [src]="item.product.imageCover" alt="{{item.product.description}}" class="modal-img">
-                                </div>
-                                <div class="name-product">
-                                  {{item.product.title}}
-                                </div>
-                            </div>
-                        </td>
-                        <!-- Price -->
-                        <td class="align-self-stretch">
-                            <div class="text-muted">
-                                {{item.price}} EGP
-                            </div>
-                        </td>
-                        <td>
-                            <p>{{item.count}}</p>
-                        </td>
-                        <!-- Total -->
-                        <td>
-                            <div class="total">
-                               {{item.price * item.count | currency:'EGP'}}
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="modal-footer">
-            <p>{{selectedOrder.createdAt| date: 'dd-MM-yyyy HH:mm aa'}}</p>
-        </div>
-      </div>
-    </div>
-  </div>

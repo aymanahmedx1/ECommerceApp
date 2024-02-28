@@ -1,7 +1,19 @@
 <app-navbar></app-navbar>
 <div class="main-app d-flex flex-column h-100 ">
     <div class="flex-grow-1 my-5">
-        <router-outlet ></router-outlet>
+        <router-outlet></router-outlet>
     </div>
     <app-footer></app-footer>
+
 </div>
+<div class="lds-roller"  *ngIf="loading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+

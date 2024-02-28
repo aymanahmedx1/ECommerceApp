@@ -1,1 +1,40 @@
-<p>brands works!</p>
+<div class="container">   
+    <h2>All Brands</h2>
+    <div class="row g-4">
+        <div class="col-md-3" *ngFor="let item of allBrands">
+            <div (click)="openBrandModal(item)" data-bs-toggle="modal" data-bs-target="#exampleModal"  > 
+                <div class="card brand cursor-pointer">
+                <img [src]="item.image" alt="{{item.name}}">
+                    <p class="text-center text-main" >{{item.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-main" id="exampleModalLabel">{{title}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center w-100">
+                  <span class="brand-title">  {{title}}</span>
+                </div>
+                <div class="d-flex justify-content-center align-items-center w-100">
+                    <img [src]="image" alt="{{title}}">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
