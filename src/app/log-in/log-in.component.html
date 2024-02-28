@@ -25,12 +25,16 @@
                         Password start with capital letter between 6 and 15 char!</p>
                 </div>
             </div>
-            <button *ngIf="!isLoading else loading" [disabled]="loginForm.invalid"
+            <div class="d-flex justify-content-between align-items-center">
+                <a routerLink="/forget" class="nav-link forget  fs-6" >Forget your password ?</a>
+                <button *ngIf="!isLoading else loading" [disabled]="loginForm.invalid"
                 class="btn btn-outline-success ms-auto d-block mt-3">Login Now</button>
+
             <ng-template #loading>
                 <button class="ms-auto d-block mt-3 btn btn-success"><i
                         class="fa-solid fa-spinner fa-spin fa-1x"></i></button>
             </ng-template>
+            </div>
         </form>
 
     </div>

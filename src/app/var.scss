@@ -55,3 +55,16 @@ a:hover {
 .bg-main-light {
     background-color: $light-color !important;
 }
+
+.register-form{
+    max-width: 50%;
+}
+
+@media screen and (max-width:992px) {
+    .register-form{
+        max-width: 100%;
+    }
+}
+
+
+

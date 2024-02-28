@@ -13,6 +13,10 @@ import { authGuard } from './guard/auth.guard';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { OrderComponent } from './order/order.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 const routes: Routes = [
   {path:"" ,redirectTo:"home",pathMatch:"full"},
@@ -27,6 +31,10 @@ const routes: Routes = [
   {path:"signUp",component:SginUpComponent , title:"SignUp"},
   {path:"order/:cartID",component:OrderComponent , title:"Check Out"},
   {path:"allorders",component:AllOrdersComponent , title:"All Orders"},
+  {path:"forget",component:ForgetPasswordComponent , title:"Forget Password"},
+  {path:"verify",component:VerifyCodeComponent , title:"Verify Code"},
+  {path:"changePassword",component:ChangePasswordComponent , title:"Reset Password"},
+  {path:"updatePassword",component:UpdatePasswordComponent , title:"Update Password"},
   {path:"**",component:NotFoundComponent , title:"404 NotFound"},
 ];
 

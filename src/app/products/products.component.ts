@@ -13,11 +13,13 @@ import { CartService } from '../service/cart.service';
 })
 export class ProductsComponent {
   allProducts: Product[] = [];
+  filterdProducts: Product[] = [];
   allCategories: Category[] = [];
   wishList: string[] = [];
   productSubscription = new Subscription();
   categoriesSubscription = new Subscription();
   wishListSubscription = new Subscription();
+  oldSearchVal:string='' ; 
   constructor(private _WishListService: WishListService, private _productService: ProductService, private toastr: ToastrService, private _CartService: CartService) { }
   ngOnInit(): void {
     this.getWighList();
@@ -47,6 +49,7 @@ export class ProductsComponent {
     this.productSubscription = this._productService.getAllProducts().subscribe({
       next: (response) => {
         this.allProducts = response.data;
+        this.filterdProducts = this.allProducts ; 
       },
       error: (error) => {
         console.log(error);
@@ -88,5 +91,21 @@ export class ProductsComponent {
     this.productSubscription.unsubscribe();
     this.categoriesSubscription.unsubscribe();
     this.wishListSubscription.unsubscribe();
+  }
+
+
+  filterProduct($event:any){
+    let newValue =$event.target.value  ; 
+    if(newValue===''){
+      this.filterdProducts = this.allProducts ; 
+    }
+    if(newValue!== this.oldSearchVal){
+      this.filterdProducts=[] ; 
+      for (const product of this.allProducts) {
+        if (product.title.toLowerCase().includes(newValue.toLowerCase())) {
+            this.filterdProducts.push(product);
+        }
+      }
+    } 
   }
 }

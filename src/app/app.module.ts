@@ -28,6 +28,10 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { OrderDetialsComponent } from './order-detials/order-detials.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     AllOrdersComponent,
     OrderSummaryComponent,
     OrderDetialsComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
+    VerifyCodeComponent,
+    UpdatePasswordComponent,
   ],
   imports: [
     BrowserModule,

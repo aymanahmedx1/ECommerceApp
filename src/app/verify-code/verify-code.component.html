@@ -1,0 +1,12 @@
+<div class="container p-5">
+    <div class="mx-auto rest-form alert alert-danger" *ngIf="errorMessage!==''">{{errorMessage}}</div>
+    <form [formGroup]="dataForm" (ngSubmit)="verfiyCode(dataForm)" class="rest-form mx-auto">
+        <label for="resetCode" class="fs-5 py-3">Verify Code</label>
+        <input type="resetCode" placeholder="resetCode " id="resetCode" formControlName="resetCode" class="form-control">
+        <div *ngIf="dataForm.invalid && dataForm.touched">
+            <div class="alert alert-danger" *ngIf="dataForm.get('resetCode')?.errors!['required']">resetCode is required</div>
+            <div class="alert alert-danger" *ngIf="dataForm.get('resetCode')?.errors!['pattern']">enter valid code</div>
+        </div>
+        <button [disabled]="dataForm.invalid" class="btn btn-outline-success my-3">Verify</button>
+    </form>
+</div>

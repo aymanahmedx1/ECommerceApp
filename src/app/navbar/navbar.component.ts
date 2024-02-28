@@ -19,16 +19,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this._CartService.cartProductCount.subscribe({
-      next: (val) => this.noOfItemInCart = val
-    });
-    
-    this._CartService.getCartProductCount().subscribe({
-      next: (response) => {
-        this._CartService.cartProductCount.next(response.numOfCartItems);
-      },
-      error:(error)=>{}
-    });
 
     this.logedSubscribe = this._AuthService.userLogedIn.subscribe({
       next: (value) => { this.userLogged = value }
@@ -37,7 +27,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
       next: (value) => {
         this.userName = value;
       }
-    })
+    });
+    if (this.userLogged) {
+      this._CartService.cartProductCount.subscribe({
+        next: (val) => this.noOfItemInCart = val
+      });
+
+      this._CartService.getCartProductCount().subscribe({
+        next: (response) => {
+          this._CartService.cartProductCount.next(response.numOfCartItems);
+        },
+        error: (error) => { }
+      });
+    }
   }
   logOut() {
     this._AuthService.logOut();

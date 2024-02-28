@@ -14,3 +14,20 @@
 .user-logo{
     color: $main-color;
 }
+.user-area{
+    top: 150%;
+    background-color: #eee;
+    width: 150%;
+    box-shadow: 2px 2px 20px #4fa74f;
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+    z-index: 999;
+}
+.user-group{
+    &:hover{
+        .user-area{
+            
+            opacity: 1;
+        }
+    }
+}

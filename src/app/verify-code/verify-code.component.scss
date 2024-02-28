@@ -1,0 +1,8 @@
+.rest-form{
+    max-width: 50%;
+}
+@media screen and (max-width:992px) {
+    .rest-form{
+        max-width: 100%;
+    }
+}
