@@ -61,12 +61,13 @@
                         Phone number !</p>
                 </div>
             </div>
-            <button *ngIf="!isLoading else loading" [disabled]="registerForm.invalid"
+            <button *ngIf="!isLoading else loading" 
                 class="btn btn-outline-success ms-auto d-block mt-3">Register Now</button>
             <ng-template #loading>
                 <button class="ms-auto d-block mt-3 btn btn-success"><i
                         class="fa-solid fa-spinner fa-spin fa-1x"></i></button>
             </ng-template>
+            <p>{{registerForm.valid}}</p>
         </form>
 
     </div>

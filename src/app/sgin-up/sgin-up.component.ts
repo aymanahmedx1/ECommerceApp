@@ -16,7 +16,7 @@ export class SginUpComponent implements OnDestroy {
   constructor(private _AuthService: AuthService, private _Router: Router) { }
   registerForm = new FormGroup(
     {
-      details: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z]{1}[a-zA-z0-9]{6,15}$/)]),
       rePassword: new FormControl('', [Validators.required, Validators.pattern(/^[A-Z]{1}[a-zA-z0-9]{6,15}$/)]),
@@ -24,15 +24,14 @@ export class SginUpComponent implements OnDestroy {
     }
   );
   register(form: any) {
-
+    console.log(form);
+    
     if (form.valid) {
       this.isLoading = true;
       this._AuthService.signUp(form.value).subscribe({
         next: (response) => {
           if (response.message == 'success') {
             this._Router.navigate(['logIn']);
-            // localStorage.setItem('token',response.token);
-            // localStorage.setItem('userName',response.user.name);
           }
           this.isLoading = false;
         },
