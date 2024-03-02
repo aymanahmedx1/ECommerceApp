@@ -28,18 +28,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.userName = value;
       }
     });
-    if (this.userLogged) {
-      this._CartService.cartProductCount.subscribe({
-        next: (val) => this.noOfItemInCart = val
-      });
-
-      this._CartService.getCartProductCount().subscribe({
-        next: (response) => {
-          this._CartService.cartProductCount.next(response.numOfCartItems);
-        },
-        error: (error) => { }
-      });
-    }
+    this._CartService.cartProductCount.subscribe({
+      next: (val) => this.noOfItemInCart = val
+    });
+    this._AuthService.getUserCartItemCount();
   }
   logOut() {
     this._AuthService.logOut();

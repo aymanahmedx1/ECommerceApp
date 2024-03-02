@@ -31,6 +31,7 @@ export class LogInComponent implements OnDestroy {
             this._AuthService.userLogedIn.next(true);
             this._AuthService.userName.next(response.user.name);
             this._Router.navigate(['home']);
+            this._AuthService.getUserCartItemCount();
           }
           this.isLoading = false;
         },
