@@ -33,12 +33,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
         next: (val) => this.noOfItemInCart = val
       });
 
-      this._CartService.getCartProductCount().subscribe({
-        next: (response) => {
-          this._CartService.cartProductCount.next(response.numOfCartItems);
-        },
-        error: (error) => { }
-      });
+      // this._CartService.getCartProductCount().subscribe({
+      //   next: (response) => {
+      //     this._CartService.cartProductCount.next(response.numOfCartItems);
+      //   },
+      //   error: (error) => { }
+      // });
     }
   }
   logOut() {

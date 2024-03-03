@@ -9,7 +9,12 @@ export class CartService {
   cartProductCount = new BehaviorSubject(0);
 
   constructor(private _HttpClient: HttpClient) {
-
+    this.getCartProductCount().subscribe({
+      next: (response) => {
+        this.cartProductCount.next(response.numOfCartItems);
+      },
+      error: (error) => { }
+    });
   }
   getUserCart(): Observable<any> {
     return this._HttpClient.get("https://ecommerce.routemisr.com/api/v1/cart");
