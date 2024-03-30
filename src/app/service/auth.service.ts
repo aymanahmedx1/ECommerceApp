@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { jwtDecode } from "jwt-decode";
 export class AuthService {
   userLogedIn = new BehaviorSubject(false);
   userName = new BehaviorSubject("");
-  constructor(private _HttpClient: HttpClient, private _Router: Router) {
+  constructor(private _HttpClient: HttpClient, private _Router: Router , private _CartService:CartService) {
     let token = localStorage.getItem("token");
     if (token) {
       this.userLogedIn.next(true) ; 
@@ -22,6 +23,15 @@ export class AuthService {
   decodeToken(token:any):any{
     const decoded = jwtDecode(token);
     return decoded;
+  }
+
+  getUserCartItemCount(){
+    this._CartService.getCartProductCount().subscribe({
+      next: (response) => {
+        this._CartService.cartProductCount.next(response.numOfCartItems);
+      },
+      error: (error) => { }
+    });
   }
 
   signUp(userData: SignUpData): Observable<any> {
@@ -35,6 +45,7 @@ export class AuthService {
     localStorage.removeItem("userName");
     this.userLogedIn.next(false);
     this._Router.navigate(["logIn"]);
+    this._CartService.cartProductCount.next(0);
   }
   sendRestPasswordCode(data:any): Observable<any>{
     return this._HttpClient.post('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', data);
